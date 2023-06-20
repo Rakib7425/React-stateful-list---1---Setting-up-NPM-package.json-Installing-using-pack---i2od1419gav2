@@ -33,7 +33,7 @@ const App = () => {
     const year = event.target.value;
     setSelectedYear(year);
   };
-
+  // console.log(data);
   return (
     <div id="main">
       <select value={selectedYear} onChange={handleYearChange}>
@@ -46,7 +46,18 @@ const App = () => {
       </select>
 
       <div id="selected-year">
-        {selectedYear ? `Selected year: ${selectedYear}` : 'No year selected'}
+        {selectedYear ? (
+          <>
+            <p>Selected year: {selectedYear}</p>
+            <ul>
+              {data[selectedYear].map((movie, index) => (
+                <li key={index+1}>{movie}</li>
+              ))}
+            </ul>
+          </>
+        ) : (
+          <p>No year selected</p>
+        )}
       </div>
     </div>
   )
