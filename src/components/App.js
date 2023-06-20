@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import '../styles/App.css';
 
@@ -27,10 +27,27 @@ const data = {
   ]
 }
 const App = () => {
+  const [selectedYear, setSelectedYear] = useState(null);
+
+  const handleYearChange = (event) => {
+    const year = event.target.value;
+    setSelectedYear(year);
+  };
 
   return (
     <div id="main">
-      
+      <select value={selectedYear} onChange={handleYearChange}>
+        <option value={null}></option>
+        {Object.keys(data).map((year) => (
+          <option key={year} value={year}>
+            {year}
+          </option>
+        ))}
+      </select>
+
+      <div id="selected-year">
+        {selectedYear ? `Selected year: ${selectedYear}` : 'No year selected'}
+      </div>
     </div>
   )
 }
